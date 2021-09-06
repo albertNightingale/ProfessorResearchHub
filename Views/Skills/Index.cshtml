@@ -1,0 +1,27 @@
+﻿@{ ViewData["Title"] = "Manage Your Skills"; }
+
+@model IEnumerable<URC.Models.Skill>
+
+<h1>@ViewData["Title"]</h1>
+
+@if (Model != null)
+{
+    foreach (var skill in Model)
+    {
+<form class="skills_form" method="post">
+    <input asp-for="@skill.SkillText" name="skillText" />
+    <input asp-action="Update" asp-route-skillId="@skill.Id" type="submit" value="Update" />
+    <input asp-action="Delete" asp-route-skillId="@skill.Id" type="submit" value="Delete" />
+    <input name="__RequestVerificationToken" type="hidden" value="<token_generated_here>">
+</form>
+    }
+} 
+else
+{
+    <h2>Add Skills to Help You Get Matched with Research Opportunities</h2>
+}
+
+<form class="skills_form" asp-action="CreateSkill" method="post">
+    <input placeholder="New Skill" name="skillText" type="text" />
+    <input type="submit" value="Add New Skill" />
+</form>

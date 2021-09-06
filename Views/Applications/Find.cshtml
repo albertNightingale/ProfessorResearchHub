@@ -1,0 +1,44 @@
+﻿
+@model IEnumerable<URC.Models.Application>
+
+@using Microsoft.AspNetCore.Identity
+@using URC.Areas.Identity.Data
+@inject SignInManager<URCUser> SignInManager
+@inject UserManager<URCUser> UserManager
+@{
+    ViewData["Title"] = "Find";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="a page for professors to find students' applicaitons based on their search" />
+    <script src="~/js/students.js"></script>
+</head>
+<body>
+    <div class="container">
+        <br />
+        <h2 align="center">Search for students</h2><br />
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input type="text" name="search_text" id="search_text" placeholder="Search applicants" class="form-control" />
+                <button type="submit" value="search_text" onclick="find()">SEARCH</button>
+            </div>
+        </div>
+        <div id="cards" class="card-columns">
+            <div id="template" class="card align-items-center" style="display:none;">
+                <img src="~/images/blank.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 id="uid"  class="card-title"></h5>
+                    <p id="email" class="card-text"></p>
+                    <p id="gpa"   class="card-text"></p>
+                    <p id="statement" class="card-text"></p>
+                    <p id ="skills"class="card-text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

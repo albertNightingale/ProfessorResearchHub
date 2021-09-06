@@ -1,0 +1,109 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h4>@ViewData["Title"]</h4>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+        <form id="profile-form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username"></label>
+                <input asp-for="Username" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.PhoneNumber"></label>
+                <input asp-for="Input.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            @if (Model.UserRoles.Contains("Student"))
+            {
+                <div class="form-group">
+                    <label asp-for="Input.Skills"></label>
+                    <ul id="skillsList">
+                        @foreach (var skill in Model.Input.Skills)
+                        {
+                            <li>@skill.SkillText</li>
+                        }
+                    </ul>
+                    <span asp-validation-for="Input.Skills" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Resume"></label>
+                    <input asp-for="Input.Resume" class="form-control" />
+                    <span asp-validation-for="Input.Resume" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserRoles"></label>
+                    <ul>
+                        @for (var roleIdx = 0; roleIdx < Model.UserRoles.Count; roleIdx++)
+                        {
+                            <li>
+                                <input asp-for="UserRoles[roleIdx]" class="form-control" disabled />
+                            </li>
+                        }
+                    </ul>
+                    <span asp-validation-for="UserRoles" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Interests"></label>
+                    <ul id="interestsList">
+                        @for (var interestIdx = 0; interestIdx < Model.Input.Interests.Count; interestIdx++)
+                        {
+                            <li>
+                                <input asp-for="Input.Interests[interestIdx]" class="form-control" />
+                            </li>
+                        }
+                    </ul>
+                    <span asp-validation-for="Input.Interests" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.GraduationDate"></label>
+                    <input asp-for="Input.GraduationDate" class="form-control" />
+                    <span asp-validation-for="Input.GraduationDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.CompletedCourses"></label>
+                    <ul id="courseCompletedList">
+                        @for (var courseIdx = 0; courseIdx < Model.Input.CompletedCourses.Count; courseIdx++)
+                        {
+                            <li>
+                                <input asp-for="Input.CompletedCourses[courseIdx]" class="form-control" />
+                            </li>
+                        }
+                    </ul>
+                    <span asp-validation-for="Input.CompletedCourses" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.DegreePlan"></label>
+                    <input asp-for="Input.DegreePlan" class="form-control" />
+                    <span asp-validation-for="Input.DegreePlan" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Name"></label>
+                    <input asp-for="Input.Name" class="form-control" />
+                    <span asp-validation-for="Input.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.UID"></label>
+                    <input asp-for="Input.UID" class="form-control" />
+                    <span asp-validation-for="Input.UID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.GPA"></label>
+                    <input asp-for="Input.GPA" class="form-control" />
+                    <span asp-validation-for="Input.GPA" class="text-danger"></span>
+                </div>
+            }
+            <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

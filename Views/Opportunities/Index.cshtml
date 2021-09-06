@@ -1,0 +1,93 @@
+﻿@model IEnumerable<WebApplication1.Models.Opportunity>
+@using Microsoft.AspNetCore.Identity
+@using URC.Areas.Identity.Data
+
+@inject SignInManager<URCUser> SignInManager
+@inject UserManager<URCUser> UserManager
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@**@
+<!--
+  Author:    Hunter Moffat
+  Partner:   None
+  Date:      9/23/2020
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Hunter Moffat - This work may not be copied for use in Academic Coursework.
+
+  I, Hunter Moffat, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+
+     A page that displays all of the opportunities stored in the database and links to the details of each opportunity
+-->
+<head>
+    <meta name="author" content="Hunter Moffat" />
+    <meta name="description" content="A page that displays all of the opportunities stored in the database and links to the details of each opportunity" />
+    <meta name="keywords" content="opportunities, research" />
+</head>
+<h1 class="text-center">Opportunities</h1>
+<body class="align-content-center">
+    <div class="card-columns">
+        @foreach (var item in Model)
+        {
+            if (item.Num_Slots > 0 && User.IsInRole("Student"))
+            {
+
+                <div class="card align-items-center">
+                    <img src="~/images/@Html.DisplayFor(modelItem => item.Image)" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Professor)</p>
+                    </div>
+                    <div class="card-body">
+                        <a asp-action="Details" asp-route-id="@item.OpportunityID" class="btn btn-primary">Details</a>
+                        @if (User.IsInRole("Student"))
+                        {
+                            var app = item.Applications.FirstOrDefault(a => a.Email == UserManager.GetUserName(User));
+                            @if (app != null)
+                            {
+                                <a asp-controller="Applications" asp-action="Edit" asp-route-id="@app.ID" class="btn btn-primary">Update</a>
+                            }
+                            else
+                            {
+                                <a asp-controller="Applications" asp-action="Create" asp-route-oId="@item.OpportunityID" class="btn btn-primary">Apply Now</a>
+                            }
+                        }
+
+                    </div>
+                </div>
+
+
+            }
+            else if (User.IsInRole("Administrator") || User.IsInRole("Professor"))
+            {
+                <div class="card align-items-center">
+                    <img src="~/images/@Html.DisplayFor(modelItem => item.Image)" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Professor)</p>
+                    </div>
+                    <div class="card-body">
+                        <a asp-action="Details" asp-route-id="@item.OpportunityID" class="btn btn-primary">Details</a>
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.OpportunityID" class="btn btn-primary">Edit</a>
+                        }
+                        @if (User.IsInRole("Professor") && User.Identity.Name == item.Professor)
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.OpportunityID" class="btn btn-primary">Edit</a>
+                        }
+
+                    </div>
+                </div>
+            }
+
+        }
+
+
+
+    </div>
+</body>

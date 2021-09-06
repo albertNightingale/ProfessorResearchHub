@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+@using URC.Areas.Identity.Data
+@using Microsoft.AspNetCore.Identity
+@model URCUser[]
+@inject UserManager<URCUser> UserManager
+
+@{
+    ViewData["Title"] = "Role_Manager";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var roles = new[] { "Administrator", "Professor", "Student" };
+
+}
+
+<head>
+    <title>DataTables </title>
+    <meta name="author" content="Hunter Moffat" />
+    <meta name="description" content="This page allows the admin to manage the roles of each user" />
+    <meta name="charset" content="utf-8" />
+    <meta name="keywords" content="amin,roles, manage" />
+</head>
+<body>
+
+    <table id="UsersAndRoles" class="table table-hover table-bordered " width="100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Admin</th>
+                <th>Professor</th>
+                <th>Student</th>
+            </tr>
+        </thead>
+        <tbody>
+            @*this gets all the users and calls the javascript file to handle the toggling of the buttons*@
+            @foreach (URCUser u in UserManager.Users.ToList())
+            {
+                var user_roles = await UserManager.GetRolesAsync(u);
+            <tr>
+
+                <td>@u.UserName</td>
+                @for (int i = 0; i < roles.Length; i++)
+                {
+                    var inrole = await UserManager.IsInRoleAsync(u, roles[i]);
+                    var switchid = u.UserName +"_"+roles[i].ToString();
+                    @if (inrole == true)
+                            {
+                               
+                        <td>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id=@switchid checked onclick="updateRole('@switchid', '@u.UserName', '@roles[i]')">
+                                <label class="custom-control-label"for=@switchid ></label>
+                            </div>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id=@switchid  onclick="updateRole('@switchid', '@u.UserName', '@roles[i]')">
+                                <label class="custom-control-label" for=@switchid></label>
+                            </div>
+                        </td>
+
+                    }
+
+                }
+
+            </tr>
+
+            }
+            
+        </tbody>
+    </table>
+
+</body>
+</html>
+

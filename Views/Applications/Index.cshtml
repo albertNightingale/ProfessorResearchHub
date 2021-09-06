@@ -1,0 +1,182 @@
+﻿@model IEnumerable<URC.Models.Application>
+
+@using Microsoft.AspNetCore.Identity
+@using URC.Areas.Identity.Data
+@inject SignInManager<URCUser> SignInManager
+@inject UserManager<URCUser> UserManager
+
+@{
+    ViewData["Title"] = "Index";
+}
+<head>
+    <link rel="stylesheet" href="/path/to/cdn/fontawesome/all.css" />
+    <meta name="description" content="a page displaying the list of applicatoins" />
+    <script src="~/js/students.js"></script>
+    <script src="bstable.js"></script>
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+</head>
+<body style="align-content:center;">
+    <h1>Application List</h1>
+        @if (User.IsInRole("Student"))
+        {
+            <table style="margin-left:auto; margin-right:auto" class="table table-striped table-bordered" id="example" width="500px">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            Opportunity Name
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Resume)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.GPA)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DateCreated)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TimeModified)
+                        </th>
+                        <th>
+                            Options
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        string name = UserManager.GetUserName(User);
+                        URCUser cur_user = await UserManager.FindByNameAsync(name);
+                        @if (cur_user.Email == item.Email)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Opportunity.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Resume)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.GPA)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateCreated)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TimeModified)
+                                </td>
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-secondary btn-sm">View</a>
+                                    <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-secondary btn-sm">Edit</a>
+                                    <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-secondary btn-sm">
+                                        <span class="iconify" data-icon="octicon:trash-24" data-inline="false"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <table style="margin-left:auto; margin-right:auto" class="table table-striped table-bordered" id="example" width="500px">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            Opportunity Name
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.GraduationDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CompletedCourses)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DegreePlan)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.GPA)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Statement)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DateCreated)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TimeModified)
+                        </th>
+                        <th>
+                            Options
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(model => item.Opportunity.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GraduationDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CompletedCourses)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DegreePlan)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GPA)
+                            </td>
+                            <td class="ellipsis">
+                                @Html.DisplayFor(modelItem => item.Statement)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateCreated)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TimeModified)
+                            </td>
+
+                            @if (User.IsInRole("Professor"))
+                            {
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-secondary btn-sm">View</a>
+                                </td>
+                            }
+                            </tr>
+                            }
+                       
+                    </tbody>
+            </table>
+        }
+</body>

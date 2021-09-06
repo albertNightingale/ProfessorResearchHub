@@ -1,0 +1,109 @@
+﻿@{
+    ViewData["Title"] = "Application";
+}
+<!--
+  Author:    Hunter Moffat
+  Partner:   None
+  Date:      9/11/2020
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Hunter Moffat - This work may not be copied for use in Academic Coursework.
+
+  I, Hunter Moffat, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+
+     An application for users to apply for research opportunities
+-->
+
+@model IEnumerable<WebApplication1.Models.Opportunity>
+
+<head>
+    <meta name="author" content="Hunter Moffat" />
+    <meta name="description" content="Application form of my website" />
+    <meta name="charset" content="utf-8" />
+    <meta name="keywords" content="student, account, manage" />
+</head>
+<form class="needs-validation" novalidate>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="FirstName">First name</label>
+            <input type="text" class="form-control" placeholder="first" id="FirstName" required>
+            <div class="valid-tooltip">
+                Awesome name!
+            </div>
+            <div class="invalid-tooltip">
+                Please input your first name.
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="LastName">Last name</label>
+            <input type="text" class="form-control" placeholder="last" id="LastName" required>
+            <div class="valid-tooltip">
+                Awesome name!
+            </div>
+            <div class="invalid-tooltip">
+                Please Input your last name.
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="EmailInput">Email address</label>
+        <input type="email" class="form-control" id="EmailInput" placeholder="name@example.com">
+    </div>
+    <div class="form-group">
+        <label for="ResearchSelection">Which research opportunity are you interested in?</label>
+        <select class="form-control" id="ResearchSelection">
+            <option>The Monkey</option>
+            <option>The Paperclip</option>
+            <option>The Mysterious Dancing Man</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="ResearchInterest">Tell us why you are interested in this research?</label>
+        <textarea class="form-control" id="ResearchInterest" rows="3"></textarea>
+    </div>
+    <p>What days of the week are you available? (select all that apply)</p>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="Monday" value="Monday">
+        <label class="form-check-label" for="Monday">Monday</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="Tuesday" value="Tuesday">
+        <label class="form-check-label" for="Tuesday">Tuesday</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="Wednesday" value="Wednesday">
+        <label class="form-check-label" for="Wednesday">Wednesday</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="Thursday" value="Thursday">
+        <label class="form-check-label" for="Thursday">Thursday</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="Friday" value="Friday">
+        <label class="form-check-label" for="Friday">Friday</label>
+    </div>
+    <br>
+    <br />
+    <div>
+        <p>How many hours a week would you like to dedicate to research</p>
+        <input type="range" name="TimeInput" id="TimeInputName" value="24" min="1" max="40" oninput="TimeRangeOutput.value = TimeInput.value">
+        <output name="TimeRangeOutputName" id="TimeRangeOutput">20</output>
+    </div>
+
+    <div class="form-group">
+        <label for="resume">Please upload your resume</label>
+        <input type="file" class="form-control-file" id="resume">
+    </div>
+
+    <div class="container">
+
+    </div>
+    <button class="btn btn-primary" data-toggle="tooltip" title="submit application" type="submit">Submit form</button>
+</form>
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>

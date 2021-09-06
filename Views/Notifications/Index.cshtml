@@ -1,0 +1,43 @@
+﻿@{ ViewData["Title"] = "Notifications"; }
+@using Microsoft.AspNetCore.Identity
+@using URC.Areas.Identity.Data
+@model IEnumerable<URC.Models.Notification>
+
+@inject SignInManager<URCUser> SignInManager
+@inject UserManager<URCUser> UserManager
+<h1>@ViewData["Title"]</h1>
+
+<head>
+    <meta name="author" content="Hunter Moffat" />
+    <meta name="description" content="A webpage that displays the privacy policy of the website" />
+    <meta name="charset" content="utf-8" />
+    <meta name="keywords" content="privacy" />
+</head>
+@if (Model.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Mark Read</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var notification in Model)
+            {
+            <tr align="center">
+                <td>
+                    <input type="checkbox" asp-for="@notification.IsRead" checked="@notification.IsRead" onclick="markRead('@notification.Id')" />
+                    
+                </td>
+                <td>
+                    <label for="@notification.NotificationMessage">@notification.NotificationMessage</label>
+                </td>
+            </tr>
+                
+            }
+        </tbody>
+    </table>
+} else
+{
+    <h2>No New Notifications</h2>
+}

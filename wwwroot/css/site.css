@@ -1,0 +1,207 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+/*Author: Hunter Moffat
+Partner: None
+Date: 9/2/2020
+Course: CS 4540, University of Utah, School of Computing
+Copyright: CS 4540 and Hunter Moffat - This work may not be copied for use in Academic Coursework.
+
+I, Hunter Moffat, certify that I wrote this code from scratch and did not copy it in part or whole from
+another source. Any references used in the completion of the assignment are cited in my README file.
+
+File Contents
+
+This is all the css I wrote for my webpage so far, I tried to make it look good
+*/
+/*FROM:https://stackoverflow.com/questions/28508435/how-to-limit-the-characters-displayed-in-a-td-entry-in-angularjsS */
+
+ul {
+    list-style: none !important;
+}
+
+.ellipsis {
+    max-width: 40px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+/*Code for search bar from: https://codepen.io/huange/pen/rbqsD */
+
+.input-group.md-form.form-sm.form-1 input {
+    border: 1px solid #bdbdbd;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
+
+.input-group.md-form.form-sm.form-2 input {
+    border: 1px solid #bdbdbd;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+    .input-group.md-form.form-sm.form-2 input.red-border {
+        border: 1px solid #ef9a9a;
+    }
+
+    .input-group.md-form.form-sm.form-2 input.lime-border {
+        border: 1px solid #cddc39;
+    }
+
+    .input-group.md-form.form-sm.form-2 input.amber-border {
+        border: 1px solid #ffca28;
+    }
+
+/*Resize the wrap to see the search bar change!*/
+.wrap {
+    width: 30%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+/* Table styling code came from: https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l, Just thought it looked way better than what I can do */
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+nav {
+    width: 100%;
+}
+.login{
+    position: relative;
+    float: right;
+}
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+    text-decoration: none;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+body {
+    background-color: mistyrose;
+}
+h1 {
+ color: firebrick;
+}
+table {
+    table-layout: auto;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+.jumbotron .opportunity{
+    position: relative;
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 300px;
+    background-size: cover;
+
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: pink;
+  border-color: #1861ac;
+}
+/*Inspiration and some code was used to design the cards from this website*/
+/* https://www.quackit.com/html/html_editors/scratchpad/?example=/css/grid/examples/cards_flexible_width_align-items_stretch */
+.card-img-top {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 300px;
+}
+/*This makes the card have a drop shadow that makes it look nice*/
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+.td {
+    text-align:center;
+}
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+/*Skill form styles
+-------------------------------------------------- */
+.skills_form {
+    margin: 1rem;
+}

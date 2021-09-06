@@ -1,0 +1,91 @@
+﻿@model URC.Models.Application
+@using Microsoft.AspNetCore.Identity
+@using URC.Areas.Identity.Data
+@inject SignInManager<URCUser> SignInManager
+@inject UserManager<URCUser> UserManager
+@{
+    ViewData["Title"] = "Create";
+}
+<head>
+    <meta name="author" content="Hunter Moffat" />
+    <meta name="description" content="A webpage that allows students to create an application" />
+    <meta name="keywords" content="apply" />
+</head>
+<h1>Create</h1>
+
+<h4>Application for @ViewBag.Opp.Name</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="OpportunityID" value=@ViewBag.Opp.OpportunityID hidden />
+            <input asp-for="Opportunity.Name" value=@ViewBag.Opp.Name hidden />
+            <div class="form-group">
+                <label asp-for="UID" class="control-label"></label>
+                <br />
+                <label class="control-label">@UserManager.GetUserName(User).Substring(0, 8)</label>
+                <input asp-for="UID" class="form-control" value=@UserManager.GetUserName(User).Substring(0,8) hidden />
+                <span asp-validation-for="UID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <br />
+                <label class="control-label">@UserManager.GetUserName(User)</label>
+                <input asp-for="Email" class="form-control" value=@UserManager.GetUserName(User) hidden />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Skills" class="control-label"></label>
+                <input asp-for="Skills" class="form-control" />
+                <span asp-validation-for="Skills" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Interests" class="control-label"></label>
+                <input asp-for="Interests" class="form-control" value=@ViewBag.Prof.Interests/>
+                <span asp-validation-for="Interests" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DegreePlan" class="control-label"></label>
+                <input asp-for="DegreePlan" class="form-control" value=@ViewBag.Prof.DegreePlan />
+                <span asp-validation-for="DegreePlan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GPA" class="control-label"></label>
+                <input asp-for="GPA" class="form-control" value=@ViewBag.Prof.GPA />
+                <span asp-validation-for="GPA" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompletedCourses" class="control-label"></label>
+                <input asp-for="CompletedCourses" class="form-control" value=@ViewBag.Prof.CompletedCourses />
+                <span asp-validation-for="CompletedCourses" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GraduationDate" class="control-label"></label>
+                <input asp-for="GraduationDate" class="form-control" value=@ViewBag.Prof.GraduationDate />
+                <span asp-validation-for="GraduationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resume" class="control-label"></label>
+                <input asp-for="Resume" class="form-control" value=@ViewBag.Prof.Resume />
+                <span asp-validation-for="Resume" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Statement" class="control-label"></label>
+                <textarea asp-for="Statement" class="form-control"></textarea>
+                <span asp-validation-for="Statement" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
