@@ -12,7 +12,7 @@ Kyle Skinner
 We have enhanced the URC project to add functionality to increase the usability for all users of the site. We implemented enhanced account features. Professors have increased control over managing a research opportunity's available positions and hiring students. Students can receive notifications when hired and about positions that match their skills. And administrators have to do less work in maintaining the opportunities listings.
 
 ## URLS
-ec2-54-198-66-224.compute-1.amazonaws.com
+ec2-54-198-66-224.compute-1.amazonaws.com (NO LONGER ACTIVE)
 
 ## Introduction
 The account management was the first step in increasing the site's usability across all role types. Users can now manage their account by changing passwords and resetting forgotten passwords. Also, users can include information about themselves in a profile section. This will aid students, in particular, to be able to prefill information that will be needed as they apply for different research opportunities, greatly speeding up the application process.
